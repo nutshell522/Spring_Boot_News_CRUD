@@ -4,10 +4,13 @@ import java.sql.Date;
 
 public class News {
 	private Integer id;
-    private String title;
+    private String topic;
     private String content;
-    private Date publish_date;
-    private String author_name;
+    private String categoryName;
+    private Date publishDate;
+    private String authorName;
+    private Date createdAt;
+    private Date updatedAt;
     private Boolean status;
     
 	public Integer getId() {
@@ -17,10 +20,10 @@ public class News {
 		this.id = id;
 	}
 	public String getTitle() {
-		return title;
+		return topic;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 	public String getContent() {
 		return content;
@@ -28,22 +31,41 @@ public class News {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getPublish_date() {
-		return publish_date;
-	}
-	public void setPublish_date(Date publish_date) {
-		this.publish_date = publish_date;
-	}
-	public String getAuthor_name() {
-		return author_name;
-	}
-	public void setAuthor_name(String author_name) {
-		this.author_name = author_name;
-	}
+
 	public Boolean getStatus() {
 		return status;
 	}
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public Date getPublishDate() {
+		return publishDate;
+	}
+	public void setPublishDate(Date publishDate) {
+		this.publishDate = publishDate;
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	} 
 }
