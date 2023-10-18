@@ -22,6 +22,8 @@ public class NewsRowMapper implements RowMapper<News> {
 		news.setCreatedAt(rs.getDate("created_at"));
 		news.setUpdatedAt(rs.getDate("updated_at"));
 		news.setStatus(rs.getBoolean("status"));
+		news.setCategoryId(rs.getInt("fk_category_id"));
+		
 		return news;
 	}
 }

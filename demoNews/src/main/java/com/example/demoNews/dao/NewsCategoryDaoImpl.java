@@ -26,14 +26,27 @@ public class NewsCategoryDaoImpl implements NewsCategoryDao {
             List<NewsCategory> newsCategoryList = db.query(sql, new NewsCategoryRowMapper());
             return Result.success(newsCategoryList);
         } catch (Exception e) {
-            return Result.failure("Failed to retrieve newsCategories data: " + e.getMessage());
+            return Result.failure("Failed to retrieve news categories data: " + e.getMessage());
         }
 	}
 
 	@Override
 	public Result<NewsCategory> getById(Integer newsCategoryId) {
-		// TODO 自動產生的方法 Stub
-		return null;
+		try {
+			String sql = "SELECT * FROM news_category WHERE id = :id AND status = 1";
+	        MapSqlParameterSource params = new MapSqlParameterSource()
+	                .addValue("id", newsCategoryId);
+
+	        NewsCategory newsCategory = db.queryForObject(sql, params, new NewsCategoryRowMapper());
+
+	        if (newsCategory != null) {
+	            return Result.success(newsCategory);
+	        } else {
+	            return Result.failure("News category not found for id: " + newsCategoryId);
+	        }
+        } catch (Exception e) {
+            return Result.failure("Failed to retrieve news category data: " + e.getMessage());
+        }
 	}
 
 	@Override
@@ -51,7 +64,7 @@ public class NewsCategoryDaoImpl implements NewsCategoryDao {
 					
 			return Result.success(newId);
 		} catch (Exception e) {
-			return Result.failure("Failed to retrieve newsCategory by ID: " + e.getMessage());
+			return Result.failure("Failed to retrieve news category by ID: " + e.getMessage());
 		}
 	}
 
@@ -60,7 +73,7 @@ public class NewsCategoryDaoImpl implements NewsCategoryDao {
 		try {
 			String sql = "UPDATE news_category "
 					+ " SET name = :name, description = :description , updated_at = :updated_at "
-					+ " WHERE id = :id ;";
+					+ " WHERE id = :id  AND status = 1;";
 			
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			
@@ -70,12 +83,16 @@ public class NewsCategoryDaoImpl implements NewsCategoryDao {
 					.addValue("updated_at", currentDateTime)
 					.addValue("id", newsCategory.getId());
 			
-			db.update(sql, params);
+			int rowsAffected = db.update(sql, params);
 			
-			return Result.success(null);
+		    if (rowsAffected > 0) {
+	                return Result.success();
+	            } else {
+	                return Result.failure("News category not found for update");
+	            }
 			
 		} catch (Exception e) {
-			return Result.failure("Failed to delete newsCategory: " + e.getMessage());
+			return Result.failure("Failed to update news category: " + e.getMessage());
 		}
 	}
 
@@ -84,7 +101,7 @@ public class NewsCategoryDaoImpl implements NewsCategoryDao {
 		try {
 			String sql = "UPDATE news_category "
 					+ " SET status = 0, updated_at = :updated_at "
-					+ " WHERE id = :id ;";
+					+ " WHERE id = :id  AND status = 1;";
 			
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			
@@ -92,12 +109,16 @@ public class NewsCategoryDaoImpl implements NewsCategoryDao {
 					.addValue("updated_at", currentDateTime)
 					.addValue("id", newsCategoryId);
 			
-			db.update(sql, params);
+			int rowsAffected = db.update(sql, params);
 			
-			return Result.success(null);
+			if (rowsAffected > 0) {
+                return Result.success();
+            } else {
+                return Result.failure("News category not found for deletion");
+            }
 			
 		} catch (Exception e) {
-			return Result.failure("Failed to delete newsCategory: " + e.getMessage());
+			return Result.failure("Failed to delete news category: " + e.getMessage());
 		}
 	}
 }

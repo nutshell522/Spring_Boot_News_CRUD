@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demoNews.model.News;
@@ -23,27 +24,31 @@ public class NewsController {
 	private NewsService service;
 	
 	@PostMapping
-	public String create(@RequestBody News news) {
-		Result<Integer> id = service.create(news);
-		return "Create Sucessed. New StuID is " + id +"." ;
+	public Result<Integer> create(@RequestBody News news) {
+		return service.create(news);
 	}
 	@GetMapping
-	public Result<List<News>> getAll() {
-		return service.getNews();
+	public Result<List<News>> getAllNews () {
+		return service.getNews(true, null, null, null);
 	}
-	@GetMapping("/{studentId}")
+	@GetMapping("/srch")
+	public Result<List<News>> searchNews(
+			@RequestParam(required = false) Integer page,
+		    @RequestParam(required = false) Integer pageSize,
+		    @RequestParam(required = false) Integer categoryId) {
+		return service.getNews(false, page, pageSize, categoryId);
+	}
+	@GetMapping("/{newsId}")
 	public Result<News> getById(@PathVariable Integer newsId) {
 		return service.getById(newsId);
 	}
 	@PutMapping
-	public String update(@RequestBody News news) {
-		service.update(news);
-		return "update successed.";
+	public Result<Void> update(@RequestBody News news) {
+		return service.update(news);
 	}
 	@DeleteMapping("/{newsId}")
-	public String delete(@PathVariable Integer newsId) {
-		service.delete(newsId);
-		return "delete successed.";
+	public Result<Void> delete(@PathVariable Integer newsId) {
+		return	service.delete(newsId);
 	}
 
 }

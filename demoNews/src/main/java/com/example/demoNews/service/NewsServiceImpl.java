@@ -13,10 +13,9 @@ import com.example.demoNews.model.Result;
 public class NewsServiceImpl implements NewsService {
 	@Autowired
 	private NewsDao repo;
-
 	@Override
-	public Result<List<News>> getNews() {
-		return repo.getNews();
+	public Result<List<News>> getNews(boolean getAll, Integer page, Integer pageSize, Integer categoryId) {
+		return repo.getNews(getAll, page, pageSize, categoryId);
 	}
 
 	@Override
@@ -38,4 +37,5 @@ public class NewsServiceImpl implements NewsService {
 	public Result<Void> delete(Integer newsId) {
 		return repo.delete(newsId);
 	}
+	
 }

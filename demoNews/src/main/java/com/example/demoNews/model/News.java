@@ -6,6 +6,7 @@ public class News {
 	private Integer id;
     private String topic;
     private String content;
+    private Integer categoryId;
     private String categoryName;
     private Date publishDate;
     private String authorName;
@@ -19,7 +20,7 @@ public class News {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getTitle() {
+	public String getTopic() {
 		return topic;
 	}
 	public void setTopic(String topic) {
@@ -67,5 +68,11 @@ public class News {
 	}
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	} 
 }
