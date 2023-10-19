@@ -17,10 +17,10 @@ public class NewsRowMapper implements RowMapper<News> {
 		news.setTopic(rs.getString("topic"));
 		news.setContent(rs.getString("content"));
 		news.setCategoryName(rs.getString("category_name"));
-		news.setPublishDate(rs.getDate("publish_date"));
+		news.setPublishDate(rs.getTimestamp("publish_date"));
 		news.setAuthorName(rs.getString("author_name"));
-		news.setCreatedAt(rs.getDate("created_at"));
-		news.setUpdatedAt(rs.getDate("updated_at"));
+		news.setCreatedAt(rs.getTimestamp("created_at"));
+		news.setUpdatedAt(rs.getTimestamp("updated_at"));
 		news.setStatus(rs.getBoolean("status"));
 		news.setCategoryId(rs.getInt("fk_category_id"));
 		

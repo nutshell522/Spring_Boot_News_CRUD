@@ -11,4 +11,5 @@ public interface NewsService {
     Result<Integer> create(News news);
     Result<Void> update(News news);
     Result<Void> delete(Integer newsId);
+    Result<Integer> getTotalCount();
 }

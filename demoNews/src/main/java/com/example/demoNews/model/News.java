@@ -1,6 +1,7 @@
 package com.example.demoNews.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class News {
 	private Integer id;
@@ -8,11 +9,12 @@ public class News {
     private String content;
     private Integer categoryId;
     private String categoryName;
-    private Date publishDate;
+    private Timestamp publishDate;
     private String authorName;
-    private Date createdAt;
-    private Date updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
     private Boolean status;
+    private String shortContent; 
     
 	public Integer getId() {
 		return id;
@@ -45,10 +47,10 @@ public class News {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public Date getPublishDate() {
+	public Timestamp getPublishDate() {
 		return publishDate;
 	}
-	public void setPublishDate(Date publishDate) {
+	public void setPublishDate(Timestamp publishDate) {
 		this.publishDate = publishDate;
 	}
 	public String getAuthorName() {
@@ -57,16 +59,16 @@ public class News {
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
-	public Date getCreatedAt() {
+	public Timestamp  getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public Integer getCategoryId() {
@@ -75,4 +77,13 @@ public class News {
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	} 
+	public String getShortContent() {
+        if (content != null && content.length() > 10) {
+            return content.substring(0, 10) + "...";
+        }
+        return content;
+    }
+    public void setShortContent(String shortContent) {
+        this.shortContent = shortContent;
+    }
 }

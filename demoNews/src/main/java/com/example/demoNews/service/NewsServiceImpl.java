@@ -37,5 +37,10 @@ public class NewsServiceImpl implements NewsService {
 	public Result<Void> delete(Integer newsId) {
 		return repo.delete(newsId);
 	}
+
+	@Override
+	public Result<Integer> getTotalCount() {
+		return repo.getTotalCount();
+	}
 	
 }

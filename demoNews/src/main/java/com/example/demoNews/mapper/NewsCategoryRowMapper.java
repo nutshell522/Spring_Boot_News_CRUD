@@ -14,8 +14,8 @@ public class NewsCategoryRowMapper implements RowMapper<NewsCategory> {
 		newsCategory.setId(rs.getInt("id"));
 		newsCategory.setName(rs.getString("name"));
 		newsCategory.setDescription(rs.getString("description"));
-		newsCategory.setCreatedAt(rs.getDate("created_at"));
-		newsCategory.setUpdatedAt(rs.getDate("updated_at"));
+		newsCategory.setCreatedAt(rs.getTimestamp("created_at"));
+		newsCategory.setUpdatedAt(rs.getTimestamp("updated_at"));
 		newsCategory.setStatus(rs.getBoolean("status"));		
 		return newsCategory;
 	}

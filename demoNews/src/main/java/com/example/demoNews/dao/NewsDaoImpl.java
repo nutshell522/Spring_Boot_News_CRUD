@@ -162,4 +162,23 @@ public class NewsDaoImpl implements NewsDao {
             return Result.failure("Failed to delete news: " + e.getMessage());
         }
     }
+
+
+	@Override
+	public Result<Integer> getTotalCount() {
+		try {
+	        String sql = "SELECT COUNT(*) FROM news WHERE status = 1";
+
+	        MapSqlParameterSource params = new MapSqlParameterSource();
+	        Integer totalCount = db.queryForObject(sql, params, Integer.class);
+
+	        if (totalCount != null) {
+	            return Result.success(totalCount);
+	        } else {
+	            return Result.failure("Failed to retrieve total count.");
+	        }
+	    } catch (Exception e) {
+	        return Result.failure("An error occurred while retrieving total count.");
+	    }
+	}
 }

@@ -22,33 +22,41 @@ import com.example.demoNews.service.NewsService;
 public class NewsController {
 	@Autowired
 	private NewsService service;
-	
+
 	@PostMapping
 	public Result<Integer> create(@RequestBody News news) {
 		return service.create(news);
 	}
+
 	@GetMapping
-	public Result<List<News>> getAllNews () {
+	public Result<List<News>> getAllNews() {
 		return service.getNews(true, null, null, null);
 	}
+
 	@GetMapping("/srch")
-	public Result<List<News>> searchNews(
-			@RequestParam(required = false) Integer page,
-		    @RequestParam(required = false) Integer pageSize,
-		    @RequestParam(required = false) Integer categoryId) {
+	public Result<List<News>> searchNews(@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Integer categoryId) {
 		return service.getNews(false, page, pageSize, categoryId);
 	}
+
 	@GetMapping("/{newsId}")
 	public Result<News> getById(@PathVariable Integer newsId) {
 		return service.getById(newsId);
 	}
+
 	@PutMapping
 	public Result<Void> update(@RequestBody News news) {
 		return service.update(news);
 	}
+
 	@DeleteMapping("/{newsId}")
 	public Result<Void> delete(@PathVariable Integer newsId) {
-		return	service.delete(newsId);
+		return service.delete(newsId);
+	}
+
+	@GetMapping("/count")
+	public Result<Integer> getNewsCount() {;
+		return service.getTotalCount();
 	}
 
 }
